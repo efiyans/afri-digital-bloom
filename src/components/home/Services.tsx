@@ -1,12 +1,12 @@
 
 import React from 'react';
 import ServiceCard from '../ui/ServiceCard';
-import { Website, ShoppingCart, Building, Database, Smartphone, Browser, Users, Calendar, FileText, Palette } from 'lucide-react';
+import { Globe, ShoppingCart, Building, Database, Smartphone, Layout, Users, Calendar, FileText, Palette } from 'lucide-react';
 
 const Services = () => {
   const services = [
     {
-      icon: <Website className="h-6 w-6" />,
+      icon: <Globe className="h-6 w-6" />,
       title: "Website & Web App Development",
       description: "Custom websites and applications for hotels, restaurants, clinics, schools, and NGOs.",
       href: "#web-development",

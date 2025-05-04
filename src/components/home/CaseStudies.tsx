@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Hotel, Clinic, School, Restaurant } from 'lucide-react';
+import { ArrowRight, Building, Stethoscope, School, UtensilsCrossed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -42,14 +42,14 @@ const CaseStudyCard = ({ icon, industry, title, description, imageUrl, className
 const CaseStudies = () => {
   const caseStudies = [
     {
-      icon: <Hotel className="h-5 w-5 text-primary" />,
+      icon: <Building className="h-5 w-5 text-primary" />,
       industry: "Hospitality",
       title: "Addis Skyline Hotel",
       description: "Complete hotel management system with booking, inventory, and customer management.",
       imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
     },
     {
-      icon: <Clinic className="h-5 w-5 text-primary" />,
+      icon: <Stethoscope className="h-5 w-5 text-primary" />,
       industry: "Healthcare",
       title: "Selam Medical Center",
       description: "Patient management, appointment scheduling and digital records system.",
@@ -63,7 +63,7 @@ const CaseStudies = () => {
       imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800",
     },
     {
-      icon: <Restaurant className="h-5 w-5 text-primary" />,
+      icon: <UtensilsCrossed className="h-5 w-5 text-primary" />,
       industry: "Food Service",
       title: "Habesha Cuisine",
       description: "POS system with inventory management and online ordering integration.",
