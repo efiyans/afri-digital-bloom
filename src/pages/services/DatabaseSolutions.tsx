@@ -94,7 +94,7 @@ const DatabaseSolutionsPage = () => {
   const faqs = [
     {
       question: 'Do we need to replace our existing database systems?',
-      answer: 'Not necessarily. We can often integrate with your existing systems, enhancing their capabilities while preserving your data and workflows. We'll evaluate your current setup and recommend the most efficient approach.',
+      answer: "Not necessarily. We can often integrate with your existing systems, enhancing their capabilities while preserving your data and workflows. We'll evaluate your current setup and recommend the most efficient approach.",
     },
     {
       question: 'How do you ensure data security?',

@@ -39,9 +39,9 @@ const ServiceCard = ({
       {cardContent}
     </a>
   ) : (
-    <div className="h-full">
+    <Link to={href} className="block h-full">
       {cardContent}
-    </div>
+    </Link>
   );
 };
 

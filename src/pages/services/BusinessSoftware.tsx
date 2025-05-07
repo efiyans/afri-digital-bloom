@@ -94,7 +94,7 @@ const BusinessSoftwarePage = () => {
   const faqs = [
     {
       question: 'Can your software work with our existing hardware?',
-      answer: 'In most cases, yes. Our solutions are designed to be compatible with standard hardware. We'll assess your current setup and recommend any necessary upgrades or replacements.',
+      answer: "In most cases, yes. Our solutions are designed to be compatible with standard hardware. We'll assess your current setup and recommend any necessary upgrades or replacements.",
     },
     {
       question: 'Do your systems work offline?',
@@ -102,7 +102,7 @@ const BusinessSoftwarePage = () => {
     },
     {
       question: 'How much training will our staff need?',
-      answer: 'Training requirements vary depending on the complexity of the system and your team's technical proficiency. We provide comprehensive training programs tailored to different user roles within your organization.',
+      description: "Training requirements vary depending on the complexity of the system and your team's technical proficiency. We provide comprehensive training programs tailored to different user roles within your organization.",
     },
     {
       question: 'Can the software grow with our business?',

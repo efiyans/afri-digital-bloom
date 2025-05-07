@@ -29,7 +29,7 @@ const WebDevelopmentPage = () => {
     },
     {
       title: 'Secure Development',
-      description: 'Industry-standard security practices to protect your website and your customers' data.',
+      description: "Industry-standard security practices to protect your website and your customers' data.",
       icon: <ShieldCheck className="h-5 w-5 text-primary" />,
     },
     {
@@ -64,7 +64,7 @@ const WebDevelopmentPage = () => {
     },
     {
       title: 'Expand Your Market Reach',
-      description: 'Reach new customers across Ethiopia and Africa with a website that's accessible 24/7, expanding your market beyond physical limitations.',
+      description: "Reach new customers across Ethiopia and Africa with a website that's accessible 24/7, expanding your market beyond physical limitations.",
     },
     {
       title: 'Improve Operational Efficiency',
@@ -86,7 +86,7 @@ const WebDevelopmentPage = () => {
     {
       title: 'Habesha Cuisine',
       industry: 'Food Service',
-      description: 'Created an online ordering platform that now accounts for 30% of the restaurant's total orders.',
+      description: "Created an online ordering platform that now accounts for 30% of the restaurant's total orders.",
       imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800',
     },
   ];
@@ -94,7 +94,7 @@ const WebDevelopmentPage = () => {
   const faqs = [
     {
       question: 'How long does it take to develop a website?',
-      answer: 'Simple websites typically take 2-4 weeks, while more complex web applications may require 2-3 months. We'll provide a detailed timeline during our initial consultation based on your specific requirements.',
+      answer: "Simple websites typically take 2-4 weeks, while more complex web applications may require 2-3 months. We'll provide a detailed timeline during our initial consultation based on your specific requirements.",
     },
     {
       question: 'Will my website work on mobile devices?',
@@ -102,7 +102,7 @@ const WebDevelopmentPage = () => {
     },
     {
       question: 'Can you update my existing website instead of building a new one?',
-      answer: 'Yes, we offer website redesign and improvement services for existing sites. We'll evaluate your current website and recommend the most cost-effective approach.',
+      answer: "Yes, we offer website redesign and improvement services for existing sites. We'll evaluate your current website and recommend the most cost-effective approach.",
     },
     {
       question: 'Do you provide website maintenance after launch?',
