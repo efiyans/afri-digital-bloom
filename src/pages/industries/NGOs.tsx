@@ -1,4 +1,3 @@
-
 import React from 'react';
 import IndustryTemplate from '@/components/industries/IndustryTemplate';
 import { Heart, BadgeDollarSign, Users } from 'lucide-react';
@@ -35,7 +34,7 @@ const NGOsIndustryPage = () => {
     },
     {
       title: 'Impact Measurement Platform',
-      description: 'Data collection and visualization systems that clearly demonstrate your organization's impact.',
+      description: 'Data collection and visualization systems that clearly demonstrate your organization\'s impact.',
     },
   ];
 
