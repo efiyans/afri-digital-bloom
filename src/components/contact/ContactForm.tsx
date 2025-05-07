@@ -1,9 +1,12 @@
-
 import React from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CheckCircle } from "lucide-react";
+import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS
+emailjs.init("AumBokm380l5i1kQe");
 
 import { Button } from "@/components/ui/button";
 import {
@@ -59,22 +62,25 @@ export function ContactForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Using Formspree with a proper form ID
-      const response = await fetch("https://formspree.io/f/xeqygvoz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const templateParams = {
+        from_name: values.name,
+        from_email: values.email,
+        phone: values.phone || 'Not provided',
+        inquiry_type: values.inquiryType,
+        message: values.message,
+        to_email: 'ephremnahusenay@gmail.com',
+      };
+
+      await emailjs.send(
+        'service_6z6a6de',
+        'template_mfkcyo9',
+        templateParams,
+        'AumBokm380l5i1kQe'
+      );
       
-      if (response.ok) {
-        setIsSubmitted(true);
-        form.reset();
-        toast.success("Message sent successfully!");
-      } else {
-        throw new Error("Failed to submit the form");
-      }
+      setIsSubmitted(true);
+      form.reset();
+      toast.success("Message sent successfully!");
     } catch (error) {
       console.error("Form submission error:", error);
       toast.error("Failed to send message. Please try again.");
