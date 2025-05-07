@@ -27,15 +27,15 @@ const navLinks = [
   {
     title: "Industries",
     dropdown: [
-      { label: "Hotels & Hospitality", href: "#" },
-      { label: "Healthcare & Clinics", href: "#" },
-      { label: "Education & Schools", href: "#" },
-      { label: "Restaurants & Food", href: "#" },
-      { label: "NGOs & Non-profits", href: "#" },
+      { label: "Hotels & Hospitality", href: "/industries/hotels-hospitality" },
+      { label: "Healthcare & Clinics", href: "/industries/healthcare-clinics" },
+      { label: "Education & Schools", href: "/industries/education-schools" },
+      { label: "Restaurants & Food", href: "/industries/restaurants-food" },
+      { label: "NGOs & Non-profits", href: "/industries/ngos-non-profits" },
     ],
   },
-  { title: "Case Studies", href: "#case-studies" },
-  { title: "About Us", href: "#about" },
+  { title: "Case Studies", href: "/case-studies" },
+  { title: "About Us", href: "/about-us" },
 ];
 
 const Navbar = () => {
