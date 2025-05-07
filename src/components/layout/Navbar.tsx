@@ -10,6 +10,7 @@ import {
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { ContactModal } from "@/components/contact/ContactModal";
 
 // Navigation data
 const navLinks = [
@@ -89,9 +90,7 @@ const Navbar = () => {
               </Link>
             )
           ))}
-          <Button asChild variant="default" size="sm" className="ml-4">
-            <Link to="#contact">Contact Us</Link>
-          </Button>
+          <ContactModal />
         </div>
 
         {/* Mobile Menu Button */}
@@ -143,9 +142,7 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <Button asChild className="w-full mt-4">
-            <Link to="#contact" onClick={toggleMobileMenu}>Contact Us</Link>
-          </Button>
+          <ContactModal className="w-full mt-4" />
         </div>
       </div>
     </header>

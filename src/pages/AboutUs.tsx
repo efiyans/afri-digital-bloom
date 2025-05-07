@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Award, ChevronRight, UserRound, Star, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ContactModal } from '@/components/contact/ContactModal';
 
 const AboutUs = () => {
   const teamMembers = [
@@ -218,11 +219,13 @@ const AboutUs = () => {
           <p className="text-xl max-w-2xl mx-auto mb-8">
             Let's work together to transform your business with custom technology solutions tailored to your needs.
           </p>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
-            <Link to="#contact">
-              Get in Touch <ChevronRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
+          <ContactModal 
+            trigger={
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
+                Get in Touch <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            }
+          />
         </div>
       </section>
 

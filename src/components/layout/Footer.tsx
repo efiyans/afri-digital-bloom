@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { ContactModal } from '@/components/contact/ContactModal';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -34,7 +36,7 @@ const Footer = () => {
         { label: "Case Studies", href: "#" },
         { label: "Careers", href: "#" },
         { label: "Blog", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Contact", href: "#", isContactTrigger: true },
       ],
     },
     {
@@ -99,18 +101,39 @@ const Footer = () => {
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a 
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary flex items-center group"
-                    >
-                      <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
-                      {link.label}
-                    </a>
+                    {link.isContactTrigger ? (
+                      <ContactModal 
+                        trigger={
+                          <button className="text-muted-foreground hover:text-primary flex items-center group">
+                            <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                            {link.label}
+                          </button>
+                        }
+                      />
+                    ) : (
+                      <a 
+                        href={link.href}
+                        className="text-muted-foreground hover:text-primary flex items-center group"
+                      >
+                        <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
+        </div>
+        
+        <div className="text-center mb-8">
+          <ContactModal 
+            trigger={
+              <Button size="lg" variant="default" className="px-8">
+                Get In Touch
+              </Button>
+            }
+          />
         </div>
         
         <div className="border-t border-gray-200 pt-8">
