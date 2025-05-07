@@ -1,7 +1,8 @@
 
 import React from 'react';
 import ServiceCard from '../ui/ServiceCard';
-import { Globe, ShoppingCart, Building, Database, Smartphone, Layout, Users, Calendar, FileText, Palette } from 'lucide-react';
+import { Globe, ShoppingCart, Building, Database, Smartphone, Layout } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -9,37 +10,37 @@ const Services = () => {
       icon: <Globe className="h-6 w-6" />,
       title: "Website & Web App Development",
       description: "Custom websites and applications for hotels, restaurants, clinics, schools, and NGOs.",
-      href: "#web-development",
+      href: "/services/web-development",
     },
     {
       icon: <ShoppingCart className="h-6 w-6" />,
       title: "Business Software",
       description: "Integrated POS, inventory management, HR & payroll, and school management systems.",
-      href: "#business-software",
+      href: "/services/business-software",
     },
     {
       icon: <Building className="h-6 w-6" />,
       title: "ERP Solutions",
       description: "Enterprise resource planning for finance, HR, inventory and operations management.",
-      href: "#erp-solutions",
+      href: "/services/erp-solutions",
     },
     {
       icon: <Smartphone className="h-6 w-6" />,
       title: "Mobile App Development",
       description: "Booking apps, loyalty programs, and delivery tracking for businesses across Africa.",
-      href: "#mobile-apps",
+      href: "/services/mobile-app-development",
     },
     {
       icon: <Database className="h-6 w-6" />,
       title: "Database Solutions",
       description: "Interactive dashboards, business intelligence tools and custom reporting systems.",
-      href: "#database",
+      href: "/services/database-solutions",
     },
     {
-      icon: <Palette className="h-6 w-6" />,
+      icon: <Layout className="h-6 w-6" />,
       title: "Digital Marketing",
       description: "SEO optimization, social media management, and logo & graphic design services.",
-      href: "#digital-marketing",
+      href: "/services/digital-marketing",
     },
   ];
 
@@ -56,14 +57,15 @@ const Services = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCard 
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              href={service.href}
-              className="h-full"
-            />
+            <Link to={service.href} key={index} className="block h-full">
+              <ServiceCard 
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                href={service.href}
+                className="h-full"
+              />
+            </Link>
           ))}
         </div>
       </div>

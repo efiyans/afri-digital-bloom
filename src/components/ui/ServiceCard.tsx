@@ -1,31 +1,47 @@
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 interface ServiceCardProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   description: string;
+  href: string;
   className?: string;
-  href?: string;
+  isExternalLink?: boolean;
 }
 
-const ServiceCard = ({ icon, title, description, className, href = "#" }: ServiceCardProps) => {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "service-card flex flex-col items-center text-center p-6 rounded-lg bg-white border border-gray-100",
-        "hover:border-primary/20 cursor-pointer",
-        className
-      )}
-    >
-      <div className="mb-4 text-primary p-3 bg-primary/10 rounded-full">
-        {icon}
+const ServiceCard = ({ 
+  icon, 
+  title, 
+  description, 
+  href, 
+  className,
+  isExternalLink = false
+}: ServiceCardProps) => {
+  const cardContent = (
+    <div className={cn(
+      'service-card bg-white p-6 rounded-lg border border-muted shadow-sm hover:border-primary/20 flex flex-col h-full',
+      className
+    )}>
+      <div className="mb-4 text-primary">{icon}</div>
+      <h3 className="font-semibold text-xl mb-2">{title}</h3>
+      <p className="text-muted-foreground mb-4 flex-grow">{description}</p>
+      <div className="text-sm font-medium text-primary hover:underline mt-auto">
+        Learn more
       </div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
+    </div>
+  );
+
+  return isExternalLink ? (
+    <a href={href} className="block h-full">
+      {cardContent}
     </a>
+  ) : (
+    <div className="h-full">
+      {cardContent}
+    </div>
   );
 };
 

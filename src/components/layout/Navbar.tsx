@@ -9,18 +9,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 // Navigation data
 const navLinks = [
   {
     title: "Services",
     dropdown: [
-      { label: "Web Development", href: "#" },
-      { label: "Business Software", href: "#" },
-      { label: "ERP Solutions", href: "#" },
-      { label: "Mobile App Development", href: "#" },
-      { label: "Database Solutions", href: "#" },
-      { label: "Digital Marketing", href: "#" },
+      { label: "Web Development", href: "/services/web-development" },
+      { label: "Business Software", href: "/services/business-software" },
+      { label: "ERP Solutions", href: "/services/erp-solutions" },
+      { label: "Mobile App Development", href: "/services/mobile-app-development" },
+      { label: "Database Solutions", href: "/services/database-solutions" },
+      { label: "Digital Marketing", href: "/services/digital-marketing" },
     ],
   },
   {
@@ -48,10 +49,10 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
         <div className="flex items-center">
-          <a href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <span className="text-2xl font-bold text-primary">AfriDigital</span>
             <span className="text-2xl font-bold text-brand-secondary">Bloom</span>
-          </a>
+          </Link>
         </div>
         
         {/* Desktop Navigation */}
@@ -68,28 +69,28 @@ const Navbar = () => {
                 <DropdownMenuContent align="end" className="w-56 bg-white">
                   {link.dropdown.map((dropdownItem, dropdownIndex) => (
                     <DropdownMenuItem key={dropdownIndex} asChild>
-                      <a 
-                        href={dropdownItem.href}
-                        className="block px-4 py-2 text-sm hover:bg-accent"
+                      <Link 
+                        to={dropdownItem.href}
+                        className="block px-4 py-2 text-sm hover:bg-accent w-full"
                       >
                         {dropdownItem.label}
-                      </a>
+                      </Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a
+              <Link
                 key={index}
-                href={link.href}
+                to={link.href}
                 className="px-3 py-2 text-sm font-medium hover:text-primary link-underline"
               >
                 {link.title}
-              </a>
+              </Link>
             )
           ))}
           <Button asChild variant="default" size="sm" className="ml-4">
-            <a href="#contact">Contact Us</a>
+            <Link to="#contact">Contact Us</Link>
           </Button>
         </div>
 
@@ -120,30 +121,30 @@ const Navbar = () => {
                   <div className="font-medium mb-2">{link.title}</div>
                   <div className="pl-4 border-l border-gray-200">
                     {link.dropdown.map((dropdownItem, dropdownIndex) => (
-                      <a
+                      <Link
                         key={dropdownIndex}
-                        href={dropdownItem.href}
+                        to={dropdownItem.href}
                         className="block py-2 text-sm text-muted-foreground hover:text-primary"
                         onClick={toggleMobileMenu}
                       >
                         {dropdownItem.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
               ) : (
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="block py-2 font-medium hover:text-primary"
                   onClick={toggleMobileMenu}
                 >
                   {link.title}
-                </a>
+                </Link>
               )}
             </div>
           ))}
           <Button asChild className="w-full mt-4">
-            <a href="#contact" onClick={toggleMobileMenu}>Contact Us</a>
+            <Link to="#contact" onClick={toggleMobileMenu}>Contact Us</Link>
           </Button>
         </div>
       </div>
