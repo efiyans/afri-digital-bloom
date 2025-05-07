@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ServiceTemplate from '@/components/services/ServiceTemplate';
 import { ShoppingCart, BarChart, Clock, Users, Settings, ClipboardList } from 'lucide-react';
@@ -102,7 +101,7 @@ const BusinessSoftwarePage = () => {
     },
     {
       question: 'How much training will our staff need?',
-      description: "Training requirements vary depending on the complexity of the system and your team's technical proficiency. We provide comprehensive training programs tailored to different user roles within your organization.",
+      answer: "Training requirements vary depending on the complexity of the system and your team's technical proficiency. We provide comprehensive training programs tailored to different user roles within your organization.",
     },
     {
       question: 'Can the software grow with our business?',

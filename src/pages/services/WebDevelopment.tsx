@@ -1,7 +1,6 @@
-
 import React from 'react';
 import ServiceTemplate from '@/components/services/ServiceTemplate';
-import { Globe, Code, PanelLeft, Mobile, ShieldCheck, Users } from 'lucide-react';
+import { Globe, Code, PanelLeft, Smartphone, ShieldCheck, Users } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
@@ -10,7 +9,7 @@ const WebDevelopmentPage = () => {
     {
       title: 'Responsive Design',
       description: 'Websites that look great and function flawlessly on all devices, from smartphones to desktops.',
-      icon: <Mobile className="h-5 w-5 text-primary" />,
+      icon: <Smartphone className="h-5 w-5 text-primary" />,
     },
     {
       title: 'Custom Solutions',
