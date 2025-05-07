@@ -35,7 +35,7 @@ const ServiceCard = ({
   );
 
   return isExternalLink ? (
-    <a href={href} className="block h-full">
+    <a href={href} className="block h-full" target="_blank" rel="noopener noreferrer">
       {cardContent}
     </a>
   ) : (

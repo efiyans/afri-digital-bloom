@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { ContactModal } from '@/components/contact/ContactModal';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,29 +12,29 @@ const Footer = () => {
     {
       title: "Solutions",
       links: [
-        { label: "Web Development", href: "#" },
-        { label: "Business Software", href: "#" },
-        { label: "ERP Solutions", href: "#" },
-        { label: "Mobile Apps", href: "#" },
-        { label: "Database Solutions", href: "#" },
-        { label: "Digital Marketing", href: "#" },
+        { label: "Web Development", href: "/services/web-development" },
+        { label: "Business Software", href: "/services/business-software" },
+        { label: "ERP Solutions", href: "/services/erp-solutions" },
+        { label: "Mobile Apps", href: "/services/mobile-app-development" },
+        { label: "Database Solutions", href: "/services/database-solutions" },
+        { label: "Digital Marketing", href: "/services/digital-marketing" },
       ],
     },
     {
       title: "Industries",
       links: [
-        { label: "Hotels & Hospitality", href: "#" },
-        { label: "Healthcare & Clinics", href: "#" },
-        { label: "Education & Schools", href: "#" },
-        { label: "Restaurants & Food", href: "#" },
-        { label: "NGOs & Non-profits", href: "#" },
+        { label: "Hotels & Hospitality", href: "/industries/hotels-hospitality" },
+        { label: "Healthcare & Clinics", href: "/industries/healthcare-clinics" },
+        { label: "Education & Schools", href: "/industries/education-schools" },
+        { label: "Restaurants & Food", href: "/industries/restaurants-food" },
+        { label: "NGOs & Non-profits", href: "/industries/ngos-non-profits" },
       ],
     },
     {
       title: "Company",
       links: [
-        { label: "About Us", href: "#" },
-        { label: "Case Studies", href: "#" },
+        { label: "About Us", href: "/about-us" },
+        { label: "Case Studies", href: "/case-studies" },
         { label: "Careers", href: "#" },
         { label: "Blog", href: "#" },
         { label: "Contact", href: "#", isContactTrigger: true },
@@ -56,12 +57,12 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
-            <a href="/" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-6">
               <div className="flex items-center">
                 <span className="text-2xl font-bold text-primary">AfriDigital</span>
                 <span className="text-2xl font-bold text-brand-secondary">Bloom</span>
               </div>
-            </a>
+            </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
               We build custom digital solutions for businesses across Ethiopia and Africa, 
               empowering local enterprises with world-class technology tailored to their unique needs.
@@ -110,7 +111,17 @@ const Footer = () => {
                           </button>
                         }
                       />
-                    ) : (
+                    ) : link.href.startsWith('http') ? (
+                      <a 
+                        href={link.href}
+                        className="text-muted-foreground hover:text-primary flex items-center group"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                        {link.label}
+                      </a>
+                    ) : link.href === "#" ? (
                       <a 
                         href={link.href}
                         className="text-muted-foreground hover:text-primary flex items-center group"
@@ -118,6 +129,14 @@ const Footer = () => {
                         <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                         {link.label}
                       </a>
+                    ) : (
+                      <Link 
+                        to={link.href}
+                        className="text-muted-foreground hover:text-primary flex items-center group"
+                      >
+                        <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                        {link.label}
+                      </Link>
                     )}
                   </li>
                 ))}

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from '@/components/ui/badge';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ContactModal } from '@/components/contact/ContactModal';
 
 // Filter categories
 const industries = ["All", "Healthcare", "Education", "Hospitality", "Food Service", "Non-profit"];
@@ -209,11 +210,13 @@ const CaseStudies = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
-                  <Button asChild variant="ghost" size="sm">
-                    <Link to="#contact">
-                      View Full Case Study <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <ContactModal
+                    trigger={
+                      <Button variant="ghost" size="sm">
+                        View Full Case Study <ChevronRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    }
+                  />
                 </CardFooter>
               </Card>
             ))}
@@ -228,10 +231,14 @@ const CaseStudies = () => {
           <p className="text-xl max-w-2xl mx-auto mb-8">
             Our team is ready to deliver the same level of exceptional results for your organization.
           </p>
-          <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
-            Start Your Success Story
-            <ChevronRight className="ml-1 h-4 w-4" />
-          </Button>
+          <ContactModal
+            trigger={
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
+                Start Your Success Story
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            }
+          />
         </div>
       </section>
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -9,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { ContactModal } from '@/components/contact/ContactModal';
 
 const AboutUs = () => {
+  
+
   const teamMembers = [
     {
       name: "Abebe Bekele",
