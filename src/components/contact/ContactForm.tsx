@@ -59,8 +59,8 @@ export function ContactForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Using Formspree - replace YOUR_FORM_ID with the actual ID from Formspree
-      const response = await fetch("https://formspree.io/f/ephremnahusenay@gmail.com", {
+      // Using Formspree with a proper form ID
+      const response = await fetch("https://formspree.io/f/xeqygvoz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,10 +71,12 @@ export function ContactForm() {
       if (response.ok) {
         setIsSubmitted(true);
         form.reset();
+        toast.success("Message sent successfully!");
       } else {
         throw new Error("Failed to submit the form");
       }
     } catch (error) {
+      console.error("Form submission error:", error);
       toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
