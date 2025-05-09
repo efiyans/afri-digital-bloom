@@ -196,6 +196,7 @@ const Navbar = () => {
           "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden transition-opacity duration-300",
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
+        aria-hidden={!isMobileMenuOpen}
       >
         <div 
           id="mobile-menu"
