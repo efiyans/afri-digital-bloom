@@ -41,24 +41,34 @@ const navLinks = [
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Reset expanded groups when closing the menu
+    if (isMobileMenuOpen) {
+      setExpandedGroups([]);
+    }
+  };
+
+  const toggleDropdownGroup = (title: string) => {
+    setExpandedGroups(prev => 
+      prev.includes(title) ? prev.filter(item => item !== title) : [...prev, title]
+    );
   };
 
   // Function to scroll to top on navigation
   const handleNavigation = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
+    setIsMobileMenuOpen(false);
   };
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setExpandedGroups([]);
   }, [location]);
 
   // Add scroll event listener to add shadow to navbar when scrolled
@@ -75,6 +85,40 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle clicks outside the mobile menu to close it
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileToggle = document.getElementById('mobile-toggle-btn');
+      
+      if (
+        isMobileMenuOpen && 
+        mobileMenu && 
+        !mobileMenu.contains(event.target as Node) &&
+        mobileToggle && 
+        !mobileToggle.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className={cn(
       "sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur transition-all duration-200",
@@ -88,7 +132,7 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Only visible on md screens and up */}
         <div className="hidden md:flex items-center space-x-1">
           {navLinks.map((link, index) => (
             link.dropdown ? (
@@ -129,7 +173,14 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMobileMenu} className="h-12 w-12">
+          <Button 
+            id="mobile-toggle-btn"
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleMobileMenu} 
+            className="h-12 w-12 text-foreground"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />
             ) : (
@@ -139,44 +190,90 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Overlay */}
       <div
         className={cn(
-          "fixed inset-0 top-16 z-50 bg-background md:hidden transform transition-transform duration-300 ease-in-out",
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden transition-opacity duration-300",
+          isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
-        <div className="container mx-auto px-4 pt-4 pb-8 overflow-y-auto max-h-[calc(100vh-4rem)]">
-          {navLinks.map((link, index) => (
-            <div key={index} className="py-2">
-              {link.dropdown ? (
-                <div className="mb-3">
-                  <div className="font-medium mb-2 text-base">{link.title}</div>
-                  <div className="pl-4 border-l border-gray-200">
-                    {link.dropdown.map((dropdownItem, dropdownIndex) => (
-                      <Link
-                        key={dropdownIndex}
-                        to={dropdownItem.href}
-                        className="block py-3 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
-                        onClick={handleNavigation}
-                      >
-                        {dropdownItem.label}
-                      </Link>
-                    ))}
+        <div 
+          id="mobile-menu"
+          className={cn(
+            "fixed inset-y-0 right-0 w-full sm:w-80 bg-white transform transition-transform duration-300 ease-in-out overflow-hidden flex flex-col",
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex items-center justify-between p-4 border-b">
+            <Link to="/" className="flex items-center" onClick={handleNavigation}>
+              <span className="text-xl font-bold text-primary">Arada</span>
+              <span className="text-xl font-bold text-brand-secondary">Tech</span>
+            </Link>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={toggleMobileMenu}
+              className="h-10 w-10"
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto p-4">
+            {navLinks.map((link, index) => (
+              <div key={index} className="py-2 border-b border-gray-100 last:border-b-0">
+                {link.dropdown ? (
+                  <div className="mb-1">
+                    <button
+                      onClick={() => toggleDropdownGroup(link.title)}
+                      className="flex items-center justify-between w-full py-3 px-1 text-base font-medium hover:text-primary min-h-[48px]"
+                      aria-expanded={expandedGroups.includes(link.title)}
+                    >
+                      <span>{link.title}</span>
+                      <ChevronDown 
+                        className={cn(
+                          "h-5 w-5 transition-transform duration-200",
+                          expandedGroups.includes(link.title) && "transform rotate-180"
+                        )} 
+                      />
+                    </button>
+                    <div 
+                      className={cn(
+                        "pl-4 overflow-hidden transition-all duration-300 ease-in-out",
+                        expandedGroups.includes(link.title) 
+                          ? "max-h-[500px] opacity-100" 
+                          : "max-h-0 opacity-0"
+                      )}
+                    >
+                      {link.dropdown.map((dropdownItem, dropdownIndex) => (
+                        <Link
+                          key={dropdownIndex}
+                          to={dropdownItem.href}
+                          className="block py-3 px-2 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
+                          onClick={handleNavigation}
+                        >
+                          {dropdownItem.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <Link
-                  to={link.href}
-                  className="block py-3 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
-                  onClick={handleNavigation}
-                >
-                  {link.title}
-                </Link>
-              )}
-            </div>
-          ))}
-          <ContactModal className="w-full mt-4" />
+                ) : (
+                  <Link
+                    to={link.href}
+                    className="block py-3 px-1 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
+                    onClick={handleNavigation}
+                  >
+                    {link.title}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          <div className="p-4 border-t mt-auto">
+            <ContactModal className="w-full" />
+          </div>
         </div>
       </div>
     </header>

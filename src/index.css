@@ -180,6 +180,37 @@
 .stagger-animate:hover > *:nth-child(5) { transition-delay: 0.4s; }
 .stagger-animate:hover > *:nth-child(6) { transition-delay: 0.5s; }
 
+/* Mobile Navigation Menu */
+.mobile-nav-dropdown-enter {
+  max-height: 0;
+  opacity: 0;
+}
+.mobile-nav-dropdown-enter-active {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 300ms ease, opacity 200ms ease;
+}
+.mobile-nav-dropdown-exit {
+  max-height: 500px;
+  opacity: 1;
+}
+.mobile-nav-dropdown-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 300ms ease, opacity 100ms ease;
+}
+
+@media (max-width: 767px) {
+  body.menu-open {
+    overflow: hidden;
+  }
+  
+  /* Override min-height for certain mobile menu items */
+  .mobile-menu-item {
+    min-height: 44px !important;
+  }
+}
+
 /* Media query utilities */
 @media (max-width: 640px) {
   .card, .container {
