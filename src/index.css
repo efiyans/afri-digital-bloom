@@ -74,18 +74,41 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-body;
+    overflow-x: hidden;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold;
+  }
+
+  /* Improve touch targets */
+  button, a, [role="button"] {
+    @apply min-h-[48px] min-w-[48px];
+  }
+
+  /* Add a utility class for default padding on mobile */
+  .container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
   }
 }
 
 /* Service card hover effect */
 .service-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  touch-action: manipulation;
 }
 
 .service-card:hover {
@@ -114,6 +137,11 @@
 .link-underline:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* Touch-optimized styles */
+.touch-manipulation {
+  touch-action: manipulation;
 }
 
 /* Button animations */
@@ -151,3 +179,36 @@
 .stagger-animate:hover > *:nth-child(4) { transition-delay: 0.3s; }
 .stagger-animate:hover > *:nth-child(5) { transition-delay: 0.4s; }
 .stagger-animate:hover > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* Media query utilities */
+@media (max-width: 640px) {
+  .card, .container {
+    @apply px-4;
+  }
+  
+  h1 {
+    @apply text-3xl;
+  }
+  
+  h2 {
+    @apply text-2xl;
+  }
+  
+  h3 {
+    @apply text-xl;
+  }
+  
+  .hidden-mobile {
+    display: none;
+  }
+}
+
+/* Lazy loading for images */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}

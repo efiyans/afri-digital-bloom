@@ -40,11 +40,22 @@ const ServiceCard = ({
   );
 
   return isExternalLink ? (
-    <a href={href} className="block h-full" target="_blank" rel="noopener noreferrer">
+    <a 
+      href={href} 
+      className="block h-full touch-manipulation" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      aria-label={`Learn more about ${title}`}
+    >
       {cardContent}
     </a>
   ) : (
-    <Link to={href} className="block h-full" onClick={handleNavigation}>
+    <Link 
+      to={href} 
+      className="block h-full touch-manipulation" 
+      onClick={handleNavigation}
+      aria-label={`Learn more about ${title}`}
+    >
       {cardContent}
     </Link>
   );

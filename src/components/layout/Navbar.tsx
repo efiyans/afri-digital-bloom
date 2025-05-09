@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
 import { ContactModal } from "@/components/contact/ContactModal";
 
-// Navigation data
+// Navigation data - remove Get Started and Blog
 const navLinks = [
   {
     title: "Services",
@@ -37,13 +37,12 @@ const navLinks = [
   },
   { title: "Case Studies", href: "/case-studies" },
   { title: "About Us", href: "/about-us" },
-  { title: "Get Started", href: "/get-started" },
-  { title: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -62,13 +61,30 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
+  // Add scroll event listener to add shadow to navbar when scrolled
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
+    <header className={cn(
+      "sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur transition-all duration-200",
+      isScrolled && "shadow-sm"
+    )}>
       <nav className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
         <div className="flex items-center">
           <Link to="/" className="flex items-center" onClick={handleNavigation}>
-            <span className="text-2xl font-bold text-primary">Arada</span>
-            <span className="text-2xl font-bold text-brand-secondary">Tech</span>
+            <span className="text-xl sm:text-2xl font-bold text-primary">Arada</span>
+            <span className="text-xl sm:text-2xl font-bold text-brand-secondary">Tech</span>
           </Link>
         </div>
         
@@ -88,7 +104,7 @@ const Navbar = () => {
                     <DropdownMenuItem key={dropdownIndex} asChild>
                       <Link 
                         to={dropdownItem.href}
-                        className="block px-4 py-2 text-sm hover:bg-accent w-full"
+                        className="block px-4 py-2 text-sm hover:bg-accent w-full min-h-[44px] flex items-center"
                         onClick={handleNavigation}
                       >
                         {dropdownItem.label}
@@ -101,7 +117,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={link.href}
-                className="px-3 py-2 text-sm font-medium hover:text-primary link-underline"
+                className="px-3 py-2 text-sm font-medium hover:text-primary link-underline min-h-[44px] flex items-center"
                 onClick={handleNavigation}
               >
                 {link.title}
@@ -113,7 +129,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
+          <Button variant="ghost" size="icon" onClick={toggleMobileMenu} className="h-12 w-12">
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />
             ) : (
@@ -130,18 +146,18 @@ const Navbar = () => {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="container mx-auto px-4 pt-4 pb-8">
+        <div className="container mx-auto px-4 pt-4 pb-8 overflow-y-auto max-h-[calc(100vh-4rem)]">
           {navLinks.map((link, index) => (
             <div key={index} className="py-2">
               {link.dropdown ? (
                 <div className="mb-3">
-                  <div className="font-medium mb-2">{link.title}</div>
+                  <div className="font-medium mb-2 text-base">{link.title}</div>
                   <div className="pl-4 border-l border-gray-200">
                     {link.dropdown.map((dropdownItem, dropdownIndex) => (
                       <Link
                         key={dropdownIndex}
                         to={dropdownItem.href}
-                        className="block py-2 text-sm text-muted-foreground hover:text-primary"
+                        className="block py-3 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
                         onClick={handleNavigation}
                       >
                         {dropdownItem.label}
@@ -152,7 +168,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to={link.href}
-                  className="block py-2 font-medium hover:text-primary"
+                  className="block py-3 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
                   onClick={handleNavigation}
                 >
                   {link.title}
