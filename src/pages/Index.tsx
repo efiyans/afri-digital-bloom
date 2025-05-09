@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Hero from '@/components/home/Hero';
 import Services from '@/components/home/Services';
@@ -9,6 +9,11 @@ import CallToAction from '@/components/home/CallToAction';
 import Footer from '@/components/layout/Footer';
 
 const Index = () => {
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

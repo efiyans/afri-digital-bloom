@@ -3,10 +3,16 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { ContactModal } from '@/components/contact/ContactModal';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+
+  // Function to scroll to top on navigation
+  const handleNavigation = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const footerSections = [
     {
@@ -35,8 +41,8 @@ const Footer = () => {
       links: [
         { label: "About Us", href: "/about-us" },
         { label: "Case Studies", href: "/case-studies" },
-        { label: "Careers", href: "#" },
-        { label: "Blog", href: "#" },
+        { label: "Blog", href: "/blog" },
+        { label: "Get Started", href: "/get-started" },
         { label: "Contact", href: "#", isContactTrigger: true },
       ],
     },
@@ -57,10 +63,10 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-6" onClick={handleNavigation}>
               <div className="flex items-center">
-                <span className="text-2xl font-bold text-primary">AfriDigital</span>
-                <span className="text-2xl font-bold text-brand-secondary">Bloom</span>
+                <span className="text-2xl font-bold text-primary">Arada</span>
+                <span className="text-2xl font-bold text-brand-secondary">Tech</span>
               </div>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
@@ -133,6 +139,7 @@ const Footer = () => {
                       <Link 
                         to={link.href}
                         className="text-muted-foreground hover:text-primary flex items-center group"
+                        onClick={handleNavigation}
                       >
                         <ChevronRight className="h-3 w-3 mr-1 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                         {link.label}
@@ -159,7 +166,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className="text-sm text-muted-foreground">
-                &copy; {currentYear} AfriDigital Bloom. All rights reserved.
+                &copy; {currentYear} Arada Tech. All rights reserved.
               </p>
             </div>
             <div className="flex space-x-6">

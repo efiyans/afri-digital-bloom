@@ -20,6 +20,11 @@ const ServiceCard = ({
   className,
   isExternalLink = false
 }: ServiceCardProps) => {
+  // Function to scroll to top on navigation
+  const handleNavigation = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const cardContent = (
     <div className={cn(
       'service-card bg-white p-6 rounded-lg border border-muted shadow-sm hover:border-primary/20 flex flex-col h-full',
@@ -39,7 +44,7 @@ const ServiceCard = ({
       {cardContent}
     </a>
   ) : (
-    <Link to={href} className="block h-full">
+    <Link to={href} className="block h-full" onClick={handleNavigation}>
       {cardContent}
     </Link>
   );

@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,10 @@ import { Link } from 'react-router-dom';
 import { ContactModal } from '@/components/contact/ContactModal';
 
 const AboutUs = () => {
-  
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const teamMembers = [
     {
@@ -64,7 +68,7 @@ const AboutUs = () => {
     {
       year: "2015",
       title: "Company Founded",
-      description: "AfriDigitalBloom was established with a vision to empower African businesses through technology.",
+      description: "Arada Tech was established with a vision to empower African businesses through technology.",
     },
     {
       year: "2017",
@@ -110,7 +114,7 @@ const AboutUs = () => {
               We empower African businesses with cutting-edge technology solutions since 2015.
             </p>
             <p className="mb-8">
-              AfriDigitalBloom was founded with a clear mission: to bridge the digital divide for African businesses by 
+              Arada Tech was founded with a clear mission: to bridge the digital divide for African businesses by 
               providing world-class technology solutions tailored to local needs. From our beginnings in Ethiopia, 
               we've grown to serve clients across East Africa, helping organizations of all sizes transform their 
               operations and achieve new levels of success through technology.
