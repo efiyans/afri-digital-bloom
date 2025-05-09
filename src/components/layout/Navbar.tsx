@@ -180,6 +180,8 @@ const Navbar = () => {
             onClick={toggleMobileMenu} 
             className="h-12 w-12 text-foreground"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />
@@ -197,6 +199,7 @@ const Navbar = () => {
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         aria-hidden={!isMobileMenuOpen}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
         <div 
           id="mobile-menu"
@@ -204,6 +207,10 @@ const Navbar = () => {
             "fixed inset-y-0 right-0 w-full sm:w-80 bg-white transform transition-transform duration-300 ease-in-out overflow-hidden flex flex-col",
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-menu-title"
         >
           <div className="flex items-center justify-between p-4 border-b">
             <Link to="/" className="flex items-center" onClick={handleNavigation}>
@@ -246,6 +253,7 @@ const Navbar = () => {
                           ? "max-h-[500px] opacity-100" 
                           : "max-h-0 opacity-0"
                       )}
+                      aria-hidden={!expandedGroups.includes(link.title)}
                     >
                       {link.dropdown.map((dropdownItem, dropdownIndex) => (
                         <Link

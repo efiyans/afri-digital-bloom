@@ -25,7 +25,7 @@ export function ContactModal({ trigger, className }: ContactModalProps) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] w-[calc(100%-2rem)] p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">Get In Touch</DialogTitle>
         </DialogHeader>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -100,6 +101,7 @@ export function ContactForm() {
         <Button 
           variant="outline" 
           onClick={() => setIsSubmitted(false)}
+          className="min-h-[48px] px-6"
         >
           Send Another Message
         </Button>
@@ -115,9 +117,9 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel className="text-sm md:text-base">Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder="Your name" className="min-h-[50px] text-base" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -130,9 +132,9 @@ export function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-sm md:text-base">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="your.email@example.com" {...field} />
+                  <Input type="email" placeholder="your.email@example.com" className="min-h-[50px] text-base" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -144,9 +146,9 @@ export function ContactForm() {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone (Optional)</FormLabel>
+                <FormLabel className="text-sm md:text-base">Phone (Optional)</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your phone number" {...field} />
+                  <Input placeholder="Your phone number" className="min-h-[50px] text-base" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -159,14 +161,14 @@ export function ContactForm() {
           name="inquiryType"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What are you inquiring about?</FormLabel>
+              <FormLabel className="text-sm md:text-base">What are you inquiring about?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="min-h-[50px] text-base">
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="text-base">
                   <SelectItem value="services">Services</SelectItem>
                   <SelectItem value="industries">Industries</SelectItem>
                   <SelectItem value="support">Support</SelectItem>
@@ -183,11 +185,11 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel className="text-sm md:text-base">Message</FormLabel>
               <FormControl>
                 <Textarea 
                   placeholder="Tell us how we can help you..." 
-                  className="min-h-[120px]"
+                  className="min-h-[120px] text-base resize-none"
                   {...field} 
                 />
               </FormControl>
@@ -198,7 +200,7 @@ export function ContactForm() {
         
         <Button 
           type="submit" 
-          className="w-full"
+          className="w-full min-h-[50px] text-base font-medium"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Sending..." : "Send Message"}
