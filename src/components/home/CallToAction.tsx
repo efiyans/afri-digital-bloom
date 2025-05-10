@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, FileText } from 'lucide-react';
+import { ContactModal } from '@/components/contact/ContactModal';
 
 const CallToAction = () => {
   return (
@@ -15,31 +15,43 @@ const CallToAction = () => {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button 
-              size="lg" 
-              className="bg-white text-brand-dark hover:bg-gray-100 w-full"
-            >
-              <Phone className="mr-2 h-5 w-5" />
-              Schedule a Call
-            </Button>
+            <ContactModal
+              trigger={
+                <Button 
+                  size="lg" 
+                  className="bg-white text-brand-dark hover:bg-gray-100 w-full"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Schedule a Call
+                </Button>
+              }
+            />
             
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-transparent border-white text-white hover:bg-white/10 w-full"
-            >
-              <Mail className="mr-2 h-5 w-5" />
-              Contact Us
-            </Button>
+            <ContactModal
+              trigger={
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="bg-transparent border-white text-white hover:bg-white/10 w-full"
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  Contact Us
+                </Button>
+              }
+            />
             
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-transparent border-white text-white hover:bg-white/10 w-full"
-            >
-              <FileText className="mr-2 h-5 w-5" />
-              Get a Quote
-            </Button>
+            <ContactModal
+              trigger={
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="bg-transparent border-white text-white hover:bg-white/10 w-full"
+                >
+                  <FileText className="mr-2 h-5 w-5" />
+                  Get a Quote
+                </Button>
+              }
+            />
           </div>
         </div>
         
