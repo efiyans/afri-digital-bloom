@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Mail, Phone, MessageSquare, HandShake, Users } from "lucide-react";
+import { Mail, Phone, MessageSquare, Handshake, Users } from "lucide-react";
 
 const Consultation = () => {
   // Scroll to top when page loads
@@ -52,7 +52,7 @@ const Consultation = () => {
                   <li className="flex gap-4">
                     <div className="flex-shrink-0">
                       <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <HandShake className="h-6 w-6" />
+                        <Handshake className="h-6 w-6" />
                       </div>
                     </div>
                     <div>
