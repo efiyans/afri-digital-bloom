@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, FileText } from 'lucide-react';
 import { ContactModal } from '@/components/contact/ContactModal';
+import { Link } from 'react-router-dom';
 
 const CallToAction = () => {
   return (
@@ -27,6 +29,17 @@ const CallToAction = () => {
               }
             />
             
+            <Link to="/consultation" className="w-full">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white/10 w-full"
+              >
+                <FileText className="mr-2 h-5 w-5" />
+                Free Consultation
+              </Button>
+            </Link>
+            
             <ContactModal
               trigger={
                 <Button 
@@ -36,19 +49,6 @@ const CallToAction = () => {
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Contact Us
-                </Button>
-              }
-            />
-            
-            <ContactModal
-              trigger={
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="bg-transparent border-white text-white hover:bg-white/10 w-full"
-                >
-                  <FileText className="mr-2 h-5 w-5" />
-                  Get a Quote
                 </Button>
               }
             />
