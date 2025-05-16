@@ -17,17 +17,15 @@ const CallToAction = () => {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <ContactModal
-              trigger={
-                <Button 
-                  size="lg" 
-                  className="bg-white text-brand-dark hover:bg-gray-100 w-full"
-                >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Schedule a Call
-                </Button>
-              }
-            />
+            <Link to="/consultation" className="w-full">
+              <Button 
+                size="lg" 
+                className="bg-white text-brand-dark hover:bg-gray-100 w-full"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Schedule a Call
+              </Button>
+            </Link>
             
             <Link to="/consultation" className="w-full">
               <Button 
@@ -40,18 +38,16 @@ const CallToAction = () => {
               </Button>
             </Link>
             
-            <ContactModal
-              trigger={
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="bg-transparent border-white text-white hover:bg-white/10 w-full"
-                >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Contact Us
-                </Button>
-              }
-            />
+            <Link to="/consultation" className="w-full">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white/10 w-full"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
         
