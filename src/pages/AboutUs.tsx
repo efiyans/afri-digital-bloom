@@ -16,28 +16,22 @@ const AboutUs = () => {
 
   const teamMembers = [
     {
-      name: "Abebe Bekele",
+      name: "Ephrem Nahusenay",
       role: "Founder & CEO",
-      bio: "Former Google engineer with 15+ years of experience in software development and digital transformation.",
-      image: "https://i.pravatar.cc/300?img=1",
+      bio: " Experience in software development and digital transformation.",
+      image: "/image/teams/efa1.jpg",
     },
     {
-      name: "Tigist Haile",
+      name: "Kirubel Tewodros",
       role: "Chief Technology Officer",
       bio: "Expert in cloud architecture with a background in developing solutions for enterprise-level organizations.",
-      image: "https://i.pravatar.cc/300?img=5",
+      image: "/image/teams/kira.jpg",
     },
     {
-      name: "Daniel Kebede",
-      role: "Head of Business Solutions",
-      bio: "Specialized in ERP implementation with experience serving clients across East Africa.",
-      image: "https://i.pravatar.cc/300?img=3",
-    },
-    {
-      name: "Frehiwot Tadesse",
-      role: "Lead Designer",
-      bio: "Award-winning UX/UI designer with a passion for creating intuitive digital experiences.",
-      image: "https://i.pravatar.cc/300?img=8",
+      name: "Eyobel Fitsum",
+      role: "",
+      bio: "Expert in cloud architecture with a background in developing solutions for enterprise-level organizations.",
+      image: "/image/teams/kira.jpg",
     },
   ];
 

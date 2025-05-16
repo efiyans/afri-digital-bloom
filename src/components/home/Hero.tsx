@@ -17,19 +17,17 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0 md:pr-6">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight animate-fade-in">
-              Empowering African Businesses with Digital Solutions
+              Empowering Ethiopian Businesses with Digital Solutions
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 md:max-w-lg animate-fade-in" style={{ animationDelay: "0.2s" }}>
               We build custom software, web applications, and digital tools designed for local businesses across Ethiopia and Africa.
             </p>
             <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <Button size="lg" className="font-medium">
-                Get Started
+              View Our Work
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg" className="font-medium">
-                View Our Work
-              </Button>
+              
             </div>
           </div>
 

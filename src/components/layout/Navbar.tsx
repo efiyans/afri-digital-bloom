@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import {
@@ -193,98 +192,102 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Navigation Overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden transition-opacity duration-300",
-          isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-        aria-hidden={!isMobileMenuOpen}
-        onClick={() => setIsMobileMenuOpen(false)}
-      >
-        <div 
-          id="mobile-menu"
-          className={cn(
-            "fixed inset-y-0 right-0 w-full sm:w-80 bg-white transform transition-transform duration-300 ease-in-out overflow-hidden flex flex-col",
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          )}
-          onClick={(e) => e.stopPropagation()}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="mobile-menu-title"
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-50 flex md:hidden"
+          aria-hidden={!isMobileMenuOpen}
         >
-          <div className="flex items-center justify-between p-4 border-b">
-            <Link to="/" className="flex items-center" onClick={handleNavigation}>
-              <span className="text-xl font-bold text-primary">Arada</span>
-              <span className="text-xl font-bold text-brand-secondary">Tech</span>
-            </Link>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleMobileMenu}
-              className="h-10 w-10"
-              aria-label="Close menu"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto p-4">
-            {navLinks.map((link, index) => (
-              <div key={index} className="py-2 border-b border-gray-100 last:border-b-0">
-                {link.dropdown ? (
-                  <div className="mb-1">
-                    <button
-                      onClick={() => toggleDropdownGroup(link.title)}
-                      className="flex items-center justify-between w-full py-3 px-1 text-base font-medium hover:text-primary min-h-[48px]"
-                      aria-expanded={expandedGroups.includes(link.title)}
-                    >
-                      <span>{link.title}</span>
-                      <ChevronDown 
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          {/* Sidebar */}
+          <aside
+            id="mobile-menu"
+            className={cn(
+              "fixed right-0 top-0 h-full w-full sm:w-80 bg-white shadow-xl transform transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto",
+              isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            )}
+            onClick={e => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-menu-title"
+          >
+            <div className="flex items-center justify-between p-4 border-b">
+              <Link to="/" className="flex items-center" onClick={handleNavigation}>
+                <span className="text-xl font-bold text-primary">Arada</span>
+                <span className="text-xl font-bold text-brand-secondary">Tech</span>
+              </Link>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleMobileMenu}
+                className="h-10 w-10"
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto">
+              {navLinks.map((link, index) => (
+                <div key={index} className="py-2 border-b border-gray-100 last:border-b-0">
+                  {link.dropdown ? (
+                    <div className="mb-1">
+                      <button
+                        onClick={() => toggleDropdownGroup(link.title)}
+                        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium hover:text-primary min-h-[48px]"
+                        aria-expanded={expandedGroups.includes(link.title)}
+                      >
+                        <span>{link.title}</span>
+                        <ChevronDown 
+                          className={cn(
+                            "h-5 w-5 transition-transform duration-200",
+                            expandedGroups.includes(link.title) && "transform rotate-180"
+                          )} 
+                        />
+                      </button>
+                      <div 
                         className={cn(
-                          "h-5 w-5 transition-transform duration-200",
-                          expandedGroups.includes(link.title) && "transform rotate-180"
-                        )} 
-                      />
-                    </button>
-                    <div 
-                      className={cn(
-                        "pl-4 overflow-hidden transition-all duration-300 ease-in-out",
-                        expandedGroups.includes(link.title) 
-                          ? "max-h-[500px] opacity-100" 
-                          : "max-h-0 opacity-0"
-                      )}
-                      aria-hidden={!expandedGroups.includes(link.title)}
-                    >
-                      {link.dropdown.map((dropdownItem, dropdownIndex) => (
-                        <Link
-                          key={dropdownIndex}
-                          to={dropdownItem.href}
-                          className="block py-3 px-2 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
-                          onClick={handleNavigation}
-                        >
-                          {dropdownItem.label}
-                        </Link>
-                      ))}
+                          "pl-4 overflow-hidden transition-all duration-300 ease-in-out",
+                          expandedGroups.includes(link.title) 
+                            ? "max-h-[500px] opacity-100" 
+                            : "max-h-0 opacity-0"
+                        )}
+                        aria-hidden={!expandedGroups.includes(link.title)}
+                      >
+                        {link.dropdown.map((dropdownItem, dropdownIndex) => (
+                          <Link
+                            key={dropdownIndex}
+                            to={dropdownItem.href}
+                            className="block py-3 px-4 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
+                            onClick={handleNavigation}
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <Link
-                    to={link.href}
-                    className="block py-3 px-1 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
-                    onClick={handleNavigation}
-                  >
-                    {link.title}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
-          
-          <div className="p-4 border-t mt-auto">
-            <ContactModal className="w-full" />
-          </div>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="block py-3 px-4 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
+                      onClick={handleNavigation}
+                    >
+                      {link.title}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            <div className="p-4 border-t mt-auto">
+              <ContactModal className="w-full" />
+            </div>
+          </aside>
         </div>
-      </div>
+      )}
     </header>
   );
 };
