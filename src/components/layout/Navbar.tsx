@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Menu, X } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
 import { ContactModal } from "@/components/contact/ContactModal";
 
-// Flatten all navigation items into tabs
-const allTabItems = [
-  // Services
-  { label: "Web Development", href: "/services/web-development" },
-  { label: "Business Software", href: "/services/business-software" },
-  { label: "ERP Solutions", href: "/services/erp-solutions" },
-  { label: "Mobile Apps", href: "/services/mobile-app-development" },
-  { label: "Database Solutions", href: "/services/database-solutions" },
-  { label: "Digital Marketing", href: "/services/digital-marketing" },
-  
-  // Industries
-  { label: "Hotels", href: "/industries/hotels-hospitality" },
-  { label: "Healthcare", href: "/industries/healthcare-clinics" },
-  { label: "Education", href: "/industries/education-schools" },
-  { label: "Restaurants", href: "/industries/restaurants-food" },
-  { label: "NGOs", href: "/industries/ngos-non-profits" },
-  
-  // Main pages
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "About Us", href: "/about-us" },
+// Navigation data - remove Get Started and Blog
+const navLinks = [
+  {
+    title: "Services",
+    dropdown: [
+      { label: "Web Development", href: "/services/web-development" },
+      { label: "Business Software", href: "/services/business-software" },
+      { label: "ERP Solutions", href: "/services/erp-solutions" },
+      { label: "Mobile App Development", href: "/services/mobile-app-development" },
+      { label: "Database Solutions", href: "/services/database-solutions" },
+      { label: "Digital Marketing", href: "/services/digital-marketing" },
+    ],
+  },
+  {
+    title: "Industries",
+    dropdown: [
+      { label: "Hotels & Hospitality", href: "/industries/hotels-hospitality" },
+      { label: "Healthcare & Clinics", href: "/industries/healthcare-clinics" },
+      { label: "Education & Schools", href: "/industries/education-schools" },
+      { label: "Restaurants & Food", href: "/industries/restaurants-food" },
+      { label: "NGOs & Non-profits", href: "/industries/ngos-non-profits" },
+    ],
+  },
+  { title: "Case Studies", href: "/case-studies" },
+  { title: "About Us", href: "/about-us" },
 ];
 
 const Navbar = () => {
@@ -122,8 +131,42 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Contact Modal for Desktop */}
-        <div className="hidden md:block">
+        {/* Desktop Navigation - Only visible on md screens and up */}
+        <div className="hidden md:flex items-center space-x-1">
+          {navLinks.map((link, index) => (
+            link.dropdown ? (
+              <DropdownMenu key={index}>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center px-3 py-2 text-sm font-medium hover:text-primary transition-colors">
+                    {link.title}
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-background border shadow-md z-50">
+                  {link.dropdown.map((dropdownItem, dropdownIndex) => (
+                    <DropdownMenuItem key={dropdownIndex} asChild>
+                      <Link 
+                        to={dropdownItem.href}
+                        className="block px-4 py-2 text-sm hover:bg-accent w-full min-h-[44px] flex items-center"
+                        onClick={handleNavigation}
+                      >
+                        {dropdownItem.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={index}
+                to={link.href}
+                className="px-3 py-2 text-sm font-medium hover:text-primary link-underline min-h-[44px] flex items-center transition-colors"
+                onClick={handleNavigation}
+              >
+                {link.title}
+              </Link>
+            )
+          ))}
           <ContactModal />
         </div>
 
@@ -148,31 +191,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Horizontal Scrollable Tab Bar */}
-      <div className="border-t bg-background/95 backdrop-blur">
-        <div className="container mx-auto px-4">
-          <ScrollArea className="w-full" type="scroll">
-            <Tabs value={location.pathname} className="w-full">
-              <TabsList className="inline-flex h-12 items-center justify-start rounded-none bg-transparent p-0 w-max">
-                {allTabItems.map((item, index) => (
-                  <TabsTrigger
-                    key={index}
-                    value={item.href}
-                    asChild
-                    className="rounded-none border-b-2 border-transparent px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:text-primary hover:border-primary/50 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent whitespace-nowrap"
-                  >
-                    <Link to={item.href} onClick={handleNavigation}>
-                      {item.label}
-                    </Link>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-            <ScrollBar orientation="horizontal" className="h-2" />
-          </ScrollArea>
-        </div>
-      </div>
-
       {/* Mobile Navigation Overlay */}
       {isMobileMenuOpen && (
         <div
@@ -184,8 +202,8 @@ const Navbar = () => {
             className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          {/* Mobile Tab List */}
-          <aside
+          {/* Sidebar */}
+            <aside
             id="mobile-menu"
             className={cn(
               "fixed right-0 top-0 h-full w-full sm:w-80 bg-background shadow-xl transform transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto z-50",
@@ -212,27 +230,59 @@ const Navbar = () => {
               </Button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-2">
-              <div className="space-y-1">
-                {allTabItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.href}
-                    className={cn(
-                      "block py-3 px-4 text-base font-medium rounded-lg transition-colors min-h-[48px] flex items-center",
-                      location.pathname === item.href
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-accent hover:text-primary"
-                    )}
-                    onClick={handleNavigation}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+            <div className="flex-1 overflow-y-auto">
+              {navLinks.map((link, index) => (
+                <div key={index} className="py-2 border-b border-gray-100 last:border-b-0">
+                  {link.dropdown ? (
+                    <div className="mb-1">
+                      <button
+                        onClick={() => toggleDropdownGroup(link.title)}
+                        className="flex items-center justify-between w-full py-4 px-4 text-base font-medium hover:text-primary min-h-[48px] bg-background hover:bg-accent transition-colors"
+                        aria-expanded={expandedGroups.includes(link.title)}
+                      >
+                        <span>{link.title}</span>
+                        <ChevronDown 
+                          className={cn(
+                            "h-5 w-5 transition-transform duration-200",
+                            expandedGroups.includes(link.title) && "transform rotate-180"
+                          )} 
+                        />
+                      </button>
+                        <div 
+                        className={cn(
+                          "pl-4 overflow-hidden transition-all duration-300 ease-in-out bg-accent/50",
+                          expandedGroups.includes(link.title) 
+                            ? "max-h-[500px] opacity-100" 
+                            : "max-h-0 opacity-0"
+                        )}
+                        aria-hidden={!expandedGroups.includes(link.title)}
+                      >
+                        {link.dropdown.map((dropdownItem, dropdownIndex) => (
+                          <Link
+                            key={dropdownIndex}
+                            to={dropdownItem.href}
+                            className="block py-4 px-4 text-base text-muted-foreground hover:text-primary hover:bg-background/80 min-h-[48px] flex items-center transition-colors"
+                            onClick={handleNavigation}
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="block py-4 px-4 text-base font-medium hover:text-primary hover:bg-accent min-h-[48px] flex items-center transition-colors"
+                      onClick={handleNavigation}
+                    >
+                      {link.title}
+                    </Link>
+                  )}
+                </div>
+              ))}
             </div>
             
-            <div className="p-4 border-t">
+            <div className="p-4 border-t mt-auto">
               <ContactModal className="w-full" />
             </div>
           </aside>
