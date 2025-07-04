@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight, Building, Stethoscope, School, UtensilsCrossed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 // Case study card component
 const CaseStudyCard = ({ icon, industry, title, description, imageUrl, className }: {
@@ -82,9 +83,11 @@ const CaseStudies = () => {
               and Africa transform their operations with custom digital solutions.
             </p>
           </div>
-          <Button variant="outline" className="mt-4 md:mt-0">
-            View All Case Studies
-          </Button>
+          <Link to="/case-studies">
+            <Button variant="outline" className="mt-4 md:mt-0">
+              View All Case Studies
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -127,7 +127,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center" onClick={handleNavigation}>
             <span className="text-xl sm:text-2xl font-bold text-primary">Arada</span>
-            <span className="text-xl sm:text-2xl font-bold text-brand-secondary">Tech</span>
+            <span className="text-xl sm:text-2xl font-bold text-secondary">Tech</span>
           </Link>
         </div>
         
@@ -137,12 +137,12 @@ const Navbar = () => {
             link.dropdown ? (
               <DropdownMenu key={index}>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center px-3 py-2 text-sm font-medium hover:text-primary">
+                  <button className="flex items-center px-3 py-2 text-sm font-medium hover:text-primary transition-colors">
                     {link.title}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white">
+                <DropdownMenuContent align="end" className="w-56 bg-background border shadow-md z-50">
                   {link.dropdown.map((dropdownItem, dropdownIndex) => (
                     <DropdownMenuItem key={dropdownIndex} asChild>
                       <Link 
@@ -160,7 +160,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={link.href}
-                className="px-3 py-2 text-sm font-medium hover:text-primary link-underline min-h-[44px] flex items-center"
+                className="px-3 py-2 text-sm font-medium hover:text-primary link-underline min-h-[44px] flex items-center transition-colors"
                 onClick={handleNavigation}
               >
                 {link.title}
@@ -203,10 +203,10 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           />
           {/* Sidebar */}
-          <aside
+            <aside
             id="mobile-menu"
             className={cn(
-              "fixed right-0 top-0 h-full w-full sm:w-80 bg-white shadow-xl transform transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto",
+              "fixed right-0 top-0 h-full w-full sm:w-80 bg-background shadow-xl transform transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto z-50",
               isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
             )}
             onClick={e => e.stopPropagation()}
@@ -217,7 +217,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between p-4 border-b">
               <Link to="/" className="flex items-center" onClick={handleNavigation}>
                 <span className="text-xl font-bold text-primary">Arada</span>
-                <span className="text-xl font-bold text-brand-secondary">Tech</span>
+                <span className="text-xl font-bold text-secondary">Tech</span>
               </Link>
               <Button 
                 variant="ghost" 
@@ -237,7 +237,7 @@ const Navbar = () => {
                     <div className="mb-1">
                       <button
                         onClick={() => toggleDropdownGroup(link.title)}
-                        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium hover:text-primary min-h-[48px]"
+                        className="flex items-center justify-between w-full py-4 px-4 text-base font-medium hover:text-primary min-h-[48px] bg-background hover:bg-accent transition-colors"
                         aria-expanded={expandedGroups.includes(link.title)}
                       >
                         <span>{link.title}</span>
@@ -248,9 +248,9 @@ const Navbar = () => {
                           )} 
                         />
                       </button>
-                      <div 
+                        <div 
                         className={cn(
-                          "pl-4 overflow-hidden transition-all duration-300 ease-in-out",
+                          "pl-4 overflow-hidden transition-all duration-300 ease-in-out bg-accent/50",
                           expandedGroups.includes(link.title) 
                             ? "max-h-[500px] opacity-100" 
                             : "max-h-0 opacity-0"
@@ -261,7 +261,7 @@ const Navbar = () => {
                           <Link
                             key={dropdownIndex}
                             to={dropdownItem.href}
-                            className="block py-3 px-4 text-base text-muted-foreground hover:text-primary min-h-[48px] flex items-center"
+                            className="block py-4 px-4 text-base text-muted-foreground hover:text-primary hover:bg-background/80 min-h-[48px] flex items-center transition-colors"
                             onClick={handleNavigation}
                           >
                             {dropdownItem.label}
@@ -272,7 +272,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.href}
-                      className="block py-3 px-4 text-base font-medium hover:text-primary min-h-[48px] flex items-center"
+                      className="block py-4 px-4 text-base font-medium hover:text-primary hover:bg-accent min-h-[48px] flex items-center transition-colors"
                       onClick={handleNavigation}
                     >
                       {link.title}

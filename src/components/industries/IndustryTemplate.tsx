@@ -62,10 +62,12 @@ const IndustryTemplate: React.FC<IndustryTemplateProps> = ({
           <div className="max-w-3xl mx-auto text-center text-white">
             <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90">{tagline}</p>
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
-              Get Your Custom Solution
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
+            <Link to="/consultation">
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
+                Get Your Custom Solution
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -180,10 +182,12 @@ const IndustryTemplate: React.FC<IndustryTemplateProps> = ({
             Let our experts show you how our technology solutions can drive growth, 
             efficiency, and innovation in your organization.
           </p>
-          <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
-            Book a Free Consultation
-            <ChevronRight className="ml-1 h-4 w-4" />
-          </Button>
+          <Link to="/consultation">
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary">
+              Book a Free Consultation
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

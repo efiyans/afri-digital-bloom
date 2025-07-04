@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -23,10 +24,12 @@ const Hero = () => {
               We build custom software, web applications, and digital tools designed for local businesses across Ethiopia and Africa.
             </p>
             <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button size="lg" className="font-medium">
-              View Our Work
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link to="/case-studies">
+                <Button size="lg" className="font-medium">
+                  View Our Work
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
               
             </div>
           </div>
